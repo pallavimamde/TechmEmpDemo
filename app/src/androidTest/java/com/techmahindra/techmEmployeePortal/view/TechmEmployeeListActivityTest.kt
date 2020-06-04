@@ -3,19 +3,26 @@ package com.techmahindra.techmEmployeePortal.view
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import com.techmahidra.optustest.ui.userinfo.CustomAssertions.Companion.hasItemCount
+import com.techmahidra.optustest.ui.userinfo.CustomMatchers.Companion.withItemCount
 import com.techmahindra.techmEmployeePortal.R
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
+import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -377,6 +384,153 @@ class TechmEmployeeListActivityTest {
 
         pressBack()
     }
+}
+    @Test
+    fun userScrollingAction() {
+        @Test
+        fun recyclerViewTestScrolling() {
+            try {
+                Thread.sleep(3000)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            val viewGroup1 = onView(
+                allOf(
+                    withId(R.id.employeeList),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.constraintLayEmpInfo)
+
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            viewGroup1.check(ViewAssertions.matches(isDisplayed()))
+        }
+
+        @Test
+        fun recyclerViewTestScrollingToPositionEndIndex() {
+            try {
+                Thread.sleep(3000)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            val viewGroup1 = onView(
+                allOf(
+                    withId(R.id.employeeList),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.constraintLayEmpInfo)
+
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            viewGroup1.perform(ViewActions.swipeUp())
+        }
+
+        @Test
+        fun recyclerViewTestScrollingToPositionTop() {
+            try {
+                Thread.sleep(3000)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            val viewGroup1 = onView(
+                allOf(
+                    withId(R.id.employeeList),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.constraintLayEmpInfo)
+
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            viewGroup1.perform(ViewActions.swipeDown())
+        }
+
+        @Test
+        fun recyclerViewClick() {
+            try {
+                Thread.sleep(3000)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            val viewGroup1 = onView(
+                allOf(
+                    withId(R.id.employeeList),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.constraintLayEmpInfo)
+
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            viewGroup1.perform(
+                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                    8,
+                    click()
+                )
+            )
+        }
+
+        @Test
+        fun countPrograms() {
+            try {
+                Thread.sleep(3000)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            val viewGroup1 = onView(
+                allOf(
+                    withId(R.id.employeeList),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.constraintLayEmpInfo)
+
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            viewGroup1.check(ViewAssertions.matches(withItemCount(10)))
+        }
+
+        @Test
+        fun countProgramsWithViewAssertion() {
+            try {
+                Thread.sleep(3000)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            val viewGroup1 = onView(
+                allOf(
+                    withId(R.id.employeeList),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.constraintLayEmpInfo)
+
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            viewGroup1.check(hasItemCount(10))
+        }
+
+    }
 
     private fun childAtPosition(
         parentMatcher: Matcher<View>, position: Int
@@ -395,4 +549,4 @@ class TechmEmployeeListActivityTest {
             }
         }
     }
-}
+
