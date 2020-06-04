@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">TechmEmployeePortal</string>
+
+    <string name="record_save_successfully">Record Save Successfully</string>
+    <string name="save">Save</string>
+    <string name="input_required">Input required</string>
+    <string name="competency">Competency :</string>
+    <string name="projectInfo">Project : </string>
+    <string name="action_add">Add</string>
+    <string name="name">Enter Name</string>
+    <string name="band">Enter Band</string>
+    <string name="designation">Enter Designation</string>
+    <string name="android">Android</string>
+    <string name="ios">iOS</string>
+    <string name="ux">UX</string>
+    <string name="tester">Tester</string>
+    <string name="id">ID</string>
+    <string name="employee_deleted_successfully">Employee Deleted Successfully</string>
+    <string name="add_employee">Add Employee</string>
+    <string name="employee_information">Employee Information</string>
+    <string name="search">Search</string>
+    <string name="match_not_found">Match Not Found</string>
+    <string name="submit">Submit</string>
+    <string name="edit">Edit</string>
+    <string name="please_select_competency">Please select competency</string>
+    <string name="please_select_project">Please select projectInfo</string>
+    <string name="employee_id">Employee ID</string>
+    <string name="select_project">Select projectInfo</string>
+    <string name="enter_project">Enter Project</string>
+    <string name="add_project">Add Project</string>
+    <string name="success">Succcess</string>
+    <string name="fail">Fail</string>
+    <string name="name_hint">Please enter your full name</string>
+    <string name="designation_hint">Please enter your designation</string>
+    <string name="band_hint">Please enter your band</string>
+    <string name="employee_id_hint">Please enter your employee id</string>
+    <string name="competency_hint">Please choose your competency</string>
+    <string name="project_hint">Please choose your project</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
