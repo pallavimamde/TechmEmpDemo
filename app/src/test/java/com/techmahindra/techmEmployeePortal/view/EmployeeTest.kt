@@ -5,7 +5,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.techmahindra.techmEmployeePortal.data.response.ResponseType
 import com.techmahindra.techmEmployeePortal.data.repository.TechmEmployeeRepository
+import com.techmahindra.techmEmployeePortal.data.response.CompetencyInfo
 import com.techmahindra.techmEmployeePortal.data.response.ProjectInfo
+import com.techmahindra.techmEmployeePortal.view.viewmodel.CompetencyViewModel
+import com.techmahindra.techmEmployeePortal.view.viewmodel.ProjectViewModel
 import com.techmahindra.techmEmployeePortal.view.viewmodel.TechmEmployeeViewModel
 import io.reactivex.Maybe
 import org.junit.Assert.*
@@ -16,7 +19,7 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class AddEmployeeTest
+class EmployeeTest
 {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -34,8 +37,9 @@ class AddEmployeeTest
         this.repositoryViewModel = TechmEmployeeRepository(application)
         this.viewModelAddEmployee = TechmEmployeeViewModel(application)
     }
+    // This test should be add because we will get success response from add employee API
     @Test
-    suspend fun test_getSingleEmployeeQuerySuccess() {
+    suspend fun test_addSingleEmployeeQuerySuccess() {
         Mockito.`when`(this.repositoryViewModel.getEmployeeInfo("1")).thenAnswer {
             return@thenAnswer Maybe.just(ArgumentMatchers.any<TechmEmployeeViewModel>())
         }
@@ -47,12 +51,10 @@ class AddEmployeeTest
         Thread.sleep(10000)
         assertNotNull(this.viewModelAddEmployee.responseType.value)
     }
-    /**
-     * This test should be fail because we will get success response from API
-     * */
 
+    // This test should be fail because we will get success response from add employee API
     @Test
-    suspend fun test_getSingleEmployeeQueryError() {
+    suspend fun test_addSingleEmployeeQueryError() {
         Mockito.`when`(this.repositoryViewModel.getEmployeeInfo("1")).thenAnswer {
             return@thenAnswer Maybe.just(ArgumentMatchers.any<TechmEmployeeViewModel>())
         }
@@ -64,37 +66,6 @@ class AddEmployeeTest
         Thread.sleep(10000)
 
         assertNull(this.viewModelAddEmployee.responseType.value)
-    }
-
-    @Test
-    suspend fun test_getProjectQuerySuccess() {
-        Mockito.`when`(this.repositoryViewModel.getProjectList()).thenAnswer {
-            return@thenAnswer Maybe.just(ArgumentMatchers.any<TechmEmployeeViewModel>())
-        }
-
-        val observer = Mockito.mock(Observer::class.java) as Observer<List<ProjectInfo>>
-        this.viewModelAddEmployee.projectInfoLiveData.observeForever(observer)
-
-        this.viewModelAddEmployee.projectInfoLiveData
-        Thread.sleep(10000)
-        assertNotNull(this.viewModelAddEmployee.projectInfoLiveData.value)
-    }
-    /**
-     * This test should be fail because we will get success response from API
-     * */
-
-    @Test
-    suspend fun test_getProjectQueryError() {
-        Mockito.`when`(this.repositoryViewModel.getProjectList()).thenAnswer {
-            return@thenAnswer Maybe.just(ArgumentMatchers.any<TechmEmployeeViewModel>())
-        }
-
-        val observer = Mockito.mock(Observer::class.java) as Observer<List<ProjectInfo>>
-        this.viewModelAddEmployee.projectInfoLiveData.observeForever(observer)
-
-        this.viewModelAddEmployee.projectInfoLiveData
-        Thread.sleep(10000)
-        assertNull(this.viewModelAddEmployee.projectInfoLiveData.value)
     }
 
 
