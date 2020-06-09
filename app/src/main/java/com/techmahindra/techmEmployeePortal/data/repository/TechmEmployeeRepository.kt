@@ -4,7 +4,9 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import com.techmahindra.techmEmployeePortal.EmployeeDao
 import com.techmahindra.techmEmployeePortal.data.response.AddEmployeeInfo
-import com.techmahindra.techmEmployeePortal.roomdatabase.ProjectInfo
+import com.techmahindra.techmEmployeePortal.data.response.CompetencyInfo
+import com.techmahindra.techmEmployeePortal.data.response.ProjectInfo
+import com.techmahindra.techmEmployeePortal.roomdatabase.CompetencyDao
 import com.techmahindra.techmEmployeePortal.roomdatabase.ProjectDao
 import com.techmahindra.telstra.roomdatabase.TechmEmployeeDb
 
@@ -15,14 +17,18 @@ import com.techmahindra.telstra.roomdatabase.TechmEmployeeDb
 class TechmEmployeeRepository {
     var employeeDao: EmployeeDao
     var projectDao: ProjectDao
+    var competencyDao: CompetencyDao
     var projectListLiveData: LiveData<List<ProjectInfo>>
     var employeeListLiveData: LiveData<List<AddEmployeeInfo>>
+    var competencyListLiveData: LiveData<List<CompetencyInfo>>
 
     constructor(application: Application) {
         var techmEmployeeDb = TechmEmployeeDb.invoke(application)
         employeeDao = techmEmployeeDb.getEmployeeDao()
         projectDao = techmEmployeeDb.getProjectDao()
+        competencyDao = techmEmployeeDb.getCompetencyDao()
         projectListLiveData = projectDao.getProjectList()
+        competencyListLiveData = competencyDao.getCompetencyList()
         employeeListLiveData = employeeDao.getTechmEmployeeList()
     }
 
@@ -31,9 +37,19 @@ class TechmEmployeeRepository {
         return projectListLiveData
     }
 
+    //get competency list
+    fun getCompetencyList(): LiveData<List<CompetencyInfo>> {
+        return competencyListLiveData
+    }
+
     //add project to db
     suspend fun addProject(projectInfo: ProjectInfo): Long {
         return projectDao.insertProject(projectInfo)
+    }
+
+    //add competency to db
+    suspend fun addCompetencies(competencyInfo: CompetencyInfo): Long {
+        return competencyDao.insertCompetency(competencyInfo)
     }
 
     //add employee to employee_info db
@@ -45,6 +61,12 @@ class TechmEmployeeRepository {
     suspend fun deleteEmployeeInfo(addEmployeeInfo: AddEmployeeInfo): Int {
         return employeeDao.deleteTechmEmployee(addEmployeeInfo)
     }
+
+    // delete project
+    suspend fun deleteProject(projectInfo: ProjectInfo): Int {
+        return projectDao.deleteProjectRecord(projectInfo)
+    }
+
 
     // update employee info
     suspend fun updateEmployeeInfo(addEmployeeInfo: AddEmployeeInfo): Int {

@@ -9,11 +9,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "employee_information")
 class AddEmployeeInfo(
-    @PrimaryKey(autoGenerate = true) var id: Int,
+    @PrimaryKey(autoGenerate = true) var employeeId: Int,
     var name: String,
     var band: String,
     var designation: String,
-    var employeeId: String,
     var competency: String,
     var project:String
 )

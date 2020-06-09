@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.techmahindra.techmEmployeePortal.R
-import com.techmahindra.techmEmployeePortal.roomdatabase.ProjectInfo
+import com.techmahindra.techmEmployeePortal.data.response.ProjectInfo
 import kotlinx.android.synthetic.main.adapter_project_info.view.*
 
 /*
@@ -66,6 +66,6 @@ class ProjectSpinnerAdapter(val context: Context, private var projectInfoList: A
     }
 
     private class ItemRowHolder(row: View) {
-        val label: TextView = row.projectInfo
+        val label: TextView = row.textViewProjectInfo
     }
 }

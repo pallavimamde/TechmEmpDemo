@@ -6,16 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.techmahindra.techmEmployeePortal.EmployeeDao
 import com.techmahindra.techmEmployeePortal.data.response.AddEmployeeInfo
-import com.techmahindra.techmEmployeePortal.roomdatabase.ProjectInfo
+import com.techmahindra.techmEmployeePortal.data.response.ProjectInfo
+import com.techmahindra.techmEmployeePortal.roomdatabase.CompetencyDao
 import com.techmahindra.techmEmployeePortal.roomdatabase.ProjectDao
 
 /**
  * TechmEmployeeDb -  Create the roomdb for employeeinfo and project
  */
-@Database(entities = [AddEmployeeInfo::class, ProjectInfo::class], version = 4)
+@Database(entities = [AddEmployeeInfo::class, ProjectInfo::class], version = 5)
 abstract class TechmEmployeeDb : RoomDatabase() {
     abstract fun getEmployeeDao(): EmployeeDao
     abstract fun getProjectDao(): ProjectDao
+    abstract fun getCompetencyDao(): CompetencyDao
 
     companion object {
         @Volatile

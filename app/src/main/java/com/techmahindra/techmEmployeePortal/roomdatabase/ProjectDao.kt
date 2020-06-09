@@ -1,10 +1,9 @@
 package com.techmahindra.techmEmployeePortal.roomdatabase
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.techmahindra.techmEmployeePortal.data.response.AddEmployeeInfo
+import com.techmahindra.techmEmployeePortal.data.response.ProjectInfo
 
 /**
  * ProjectDao - project roomdb to get project data
@@ -17,4 +16,6 @@ interface ProjectDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProject(projectInfo: ProjectInfo): Long
 
+    @Delete
+    suspend fun deleteProjectRecord(projectInfo: ProjectInfo): Int
 }

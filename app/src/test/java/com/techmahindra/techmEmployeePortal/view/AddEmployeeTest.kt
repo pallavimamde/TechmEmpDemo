@@ -5,7 +5,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.techmahindra.techmEmployeePortal.data.response.ResponseType
 import com.techmahindra.techmEmployeePortal.data.repository.TechmEmployeeRepository
-import com.techmahindra.techmEmployeePortal.roomdatabase.ProjectInfo
+import com.techmahindra.techmEmployeePortal.data.response.ProjectInfo
 import com.techmahindra.techmEmployeePortal.view.viewmodel.TechmEmployeeViewModel
 import io.reactivex.Maybe
 import org.junit.Assert.*

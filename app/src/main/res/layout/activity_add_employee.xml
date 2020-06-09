@@ -4,221 +4,208 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/const_layout_emp_list"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/dimen_10">
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_emp_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dimen_10">
 
 
-        <Button
-            android:id="@+id/btn_emp_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_10"
-            android:clickable="false"
-            android:visibility="visible"
-            android:layout_marginVertical="@dimen/dimen_5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/edit"/>
-        <EditText
-            android:id="@+id/etv_add_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10"
-            android:hint="@string/id"
-            android:inputType="text"
-            android:maxLines="1"
-            android:layout_marginVertical="@dimen/dimen_5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_emp_edit" />
-        <EditText
-            android:id="@+id/etv_add_emp_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10"
-            android:hint="@string/employee_id_hint"
-            android:inputType="text"
-            android:maxLines="1"
-            android:layout_marginVertical="@dimen/dimen_5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etv_add_id" />
-
-        <EditText
-            android:id="@+id/etv_add_emp_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10"
-            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:hint="@string/name_hint"
-            android:inputType="text"
-            android:maxLines="1"
-            android:layout_marginVertical="@dimen/dimen_5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etv_add_emp_id" />
-
-        <EditText
-            android:id="@+id/etv_add_emp_band"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10"
-            android:hint="@string/band_hint"
-            android:inputType="text"
-            android:maxLines="1"
-            android:layout_marginVertical="@dimen/dimen_5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etv_add_emp_name" />
-
-        <EditText
-            android:id="@+id/etv_add_emp_designation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10"
-            android:hint="@string/designation_hint"
-            android:inputType="text"
-            android:maxLines="1"
-            android:layout_marginVertical="@dimen/dimen_5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etv_add_emp_band" />
-
-        <TextView
-            android:id="@+id/tv_emp_competency_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10"
-            android:maxLines="1"
-            android:layout_marginVertical="@dimen/dimen_5"
-            android:text="@string/competency"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/textsize_21"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etv_add_emp_designation" />
-
-        <RadioGroup
-            android:id="@+id/rg_emp_competency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/dimen_5"
-            android:layout_marginLeft="@dimen/dimen_10"
-            android:layout_marginBottom="@dimen/dimen_10"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_emp_competency_label">
-
-            <RadioButton
-                android:id="@+id/radio_android"
-                android:layout_width="fill_parent"
+            <Button
+                android:id="@+id/btn_emp_edit"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10"
-                android:checked="false"
-                android:text="@string/android"
-                android:textSize="@dimen/textsize_21" />
+                android:layout_margin="@dimen/dimen_10"
+                android:layout_marginVertical="@dimen/dimen_5"
+                android:clickable="false"
+                android:text="@string/edit"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioButton
-                android:id="@+id/radio_ios"
-                android:layout_width="fill_parent"
+            <EditText
+                android:id="@+id/etv_add_emp_id"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10"
-                android:checked="false"
-                android:text="@string/ios"
-                android:textSize="@dimen/textsize_21" />
+                android:layout_marginVertical="@dimen/dimen_5"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:hint="@string/id"
+                android:inputType="text"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_emp_edit" />
 
-            <RadioButton
-                android:id="@+id/radio_ux"
-                android:layout_width="fill_parent"
+            <EditText
+                android:id="@+id/etv_add_emp_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10"
-                android:checked="false"
-                android:text="@string/ux"
-                android:textSize="@dimen/textsize_21" />
+                android:layout_marginVertical="@dimen/dimen_5"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:hint="@string/name_hint"
+                android:inputType="text"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etv_add_emp_id" />
 
-            <RadioButton
-                android:id="@+id/radio_tester"
-                android:layout_width="fill_parent"
+            <EditText
+                android:id="@+id/etv_add_emp_band"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10"
-                android:checked="false"
-                android:text="@string/tester"
-                android:textSize="@dimen/textsize_21" />
-        </RadioGroup>
+                android:layout_marginVertical="@dimen/dimen_5"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:hint="@string/band_hint"
+                android:inputType="text"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etv_add_emp_name" />
 
-        <TextView
-            android:id="@+id/tv_emp_project_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/dimen_10"
-            android:text="@string/projectInfo"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/textsize_21"
-            app:layout_constraintBottom_toTopOf="@+id/spinner_emp_project"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toEndOf="@+id/img_btn_add_project"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rg_emp_competency" />
+            <EditText
+                android:id="@+id/etv_add_emp_designation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dimen_5"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:hint="@string/designation_hint"
+                android:inputType="text"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etv_add_emp_band" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner_emp_project"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/dimen_5"
-            android:layout_marginHorizontal="@dimen/dimen_10"
-            android:layout_marginBottom="@dimen/dimen_10"
-            app:layout_constraintBottom_toTopOf="@+id/tv_add_emp_error"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_emp_project_label" />
+            <TextView
+                android:id="@+id/tv_emp_competency_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dimen_5"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:maxLines="1"
+                android:text="@string/competency"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textsize_21"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etv_add_emp_designation" />
 
-        <ImageButton
-            android:id="@+id/img_btn_add_project"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/btn_add"
-            android:layout_marginVertical="@dimen/dimen_5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
-            app:layout_constraintStart_toEndOf="@+id/tv_emp_project_label"
-            app:layout_constraintTop_toBottomOf="@+id/rg_emp_competency" />
+            <RadioGroup
+                android:id="@+id/rg_emp_competency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dimen_5"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginBottom="@dimen/dimen_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_emp_competency_label">
 
-        <TextView
-            android:id="@+id/tv_add_emp_error"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10"
-            android:maxLines="1"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="@dimen/textsize_12"
-            android:visibility="invisible"
-            android:layout_marginVertical="@dimen/dimen_5"
-            app:layout_constraintBottom_toTopOf="@+id/btn_add_emp_submit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_emp_project" />
+                <RadioButton
+                    android:id="@+id/radio_android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="false"
+                    android:textSize="@dimen/textsize_21" />
 
-        <Button
-            android:id="@+id/btn_add_emp_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:background="@color/colorPrimary"
-            android:text="@string/submit"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/textsize_14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_add_emp_error"
-            android:layout_marginBottom="@dimen/dimen_20"/>
+                <RadioButton
+                    android:id="@+id/radio_ios"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="false"
+                    android:textSize="@dimen/textsize_21" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+                <RadioButton
+                    android:id="@+id/radio_ux"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="false"
+                    android:textSize="@dimen/textsize_21" />
+
+                <RadioButton
+                    android:id="@+id/radio_tester"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="false"
+                    android:textSize="@dimen/textsize_21" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_emp_project_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dimen_10"
+                android:text="@string/projectInfo"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textsize_21"
+                app:layout_constraintBottom_toTopOf="@+id/spinner_emp_project"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toEndOf="@+id/img_btn_add_project"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rg_emp_competency" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_emp_project"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_10"
+                android:layout_marginVertical="@dimen/dimen_5"
+                android:layout_marginBottom="@dimen/dimen_10"
+                app:layout_constraintBottom_toTopOf="@+id/tv_add_emp_error"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_emp_project_label" />
+
+            <ImageButton
+                android:id="@+id/img_btn_add_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dimen_5"
+                android:src="@drawable/btn_add"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintStart_toEndOf="@+id/tv_emp_project_label"
+                app:layout_constraintTop_toBottomOf="@+id/rg_emp_competency" />
+
+            <TextView
+                android:id="@+id/tv_add_emp_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dimen_5"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:maxLines="1"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="@dimen/textsize_12"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/btn_add_emp_submit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_emp_project" />
+
+            <Button
+                android:id="@+id/btn_add_emp_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_marginBottom="@dimen/dimen_20"
+                android:background="@color/colorPrimary"
+                android:text="@string/submit"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_emp_error" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </FrameLayout>

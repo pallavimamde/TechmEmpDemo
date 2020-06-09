@@ -7,23 +7,26 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techmahindra.techmEmployeePortal.R
-import com.techmahindra.techmEmployeePortal.roomdatabase.ProjectInfo
+import com.techmahindra.techmEmployeePortal.data.response.ProjectInfo
+import com.techmahindra.techmEmployeePortal.view.ProjectActivity.Companion.deleteProject
 import kotlinx.android.synthetic.main.adapter_project_info.view.*
 import kotlin.collections.ArrayList
 
 class AdapterProject(
-    private var ProjectInfoList: ArrayList<ProjectInfo>,
+    private var projectInfoList: ArrayList<ProjectInfo>,
     private val context: Context?
-) : RecyclerView.Adapter<ViewHolderProject>() {
+) : RecyclerView.Adapter<AdapterProject.ViewHolderProject>() {
     private var itemsList = ArrayList<ProjectInfo>()
+    var rowIndex: Int
 
     init {
-        itemsList.addAll(ProjectInfoList)
+        itemsList.addAll(projectInfoList)
+        rowIndex = -1 // default selected row index
     }
 
     // get total list item
     override fun getItemCount(): Int {
-        return ProjectInfoList.size
+        return projectInfoList.size
     }
 
 
@@ -40,33 +43,41 @@ class AdapterProject(
 
     // bind data to viewholder
     override fun onBindViewHolder(holder: ViewHolderProject, position: Int) {
-        holder.projectName.text = ProjectInfoList[position].projectName
-
-        holder.bind(ProjectInfoList[position], position)
+        holder.bind(projectInfoList[position], position)
 
     }
 
     // delete item at selected location
     fun delete(position: Int) {
-        this.ProjectInfoList.removeAt(position)
+        this.projectInfoList.removeAt(position)
         notifyItemRemoved(position)
     }
 
     // load product list
     fun loadProductlistInfo(dataInformation: List<ProjectInfo>) {
-        this.ProjectInfoList = dataInformation as ArrayList<ProjectInfo>
-        itemsList.addAll(ProjectInfoList)
+        this.projectInfoList = dataInformation as ArrayList<ProjectInfo>
+        itemsList.addAll(projectInfoList)
         notifyDataSetChanged()
     }
-}
 
-class ViewHolderProject(view: View) : RecyclerView.ViewHolder(view) {
-    fun bind(
-        projectInfo: ProjectInfo,
-        position: Int
-    ) {
-
+    // delete item at swiped position from list
+    fun removeAt(position: Int) {
+        deleteProject = projectInfoList[position].projectId
+        projectInfoList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
-    val projectName: TextView = view.projectInfo
+
+   inner class ViewHolderProject(view: View) : RecyclerView.ViewHolder(view) {
+        fun bind(projectrow: ProjectInfo, position: Int) {
+            projectName.text = projectrow.projectName
+
+            itemView.setOnClickListener {
+                rowIndex = position
+                notifyDataSetChanged() // notify when data change
+            }
+        }
+
+        val projectName: TextView = view.textViewProjectInfo
+    }
 }

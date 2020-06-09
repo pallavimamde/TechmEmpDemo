@@ -17,14 +17,20 @@ import com.techmahindra.techmEmployeePortal.R
 import com.techmahindra.techmEmployeePortal.core.TechmEmployeeApplication
 import com.techmahindra.techmEmployeePortal.view.adapter.ProjectSpinnerAdapter
 import com.techmahindra.techmEmployeePortal.data.response.AddEmployeeInfo
-import com.techmahindra.techmEmployeePortal.roomdatabase.ProjectInfo
+import com.techmahindra.techmEmployeePortal.data.response.CompetencyInfo
+import com.techmahindra.techmEmployeePortal.data.response.ProjectInfo
 import com.techmahindra.techmEmployeePortal.utils.AppConstant
+import com.techmahindra.techmEmployeePortal.view.viewmodel.CompetencyViewModel
+import com.techmahindra.techmEmployeePortal.view.viewmodel.ProjectViewModel
 import com.techmahindra.techmEmployeePortal.view.viewmodel.TechmEmployeeViewModel
 import kotlinx.android.synthetic.main.activity_add_employee.*
+import kotlinx.android.synthetic.main.activity_project.*
 
 class AddTechmEmployeeActivity : AppCompatActivity() {
     private lateinit var builder: AlertDialog.Builder
     private lateinit var techmEmployeeViewModel: TechmEmployeeViewModel
+    private lateinit var projectViewModel: ProjectViewModel
+    private lateinit var competencyViewModel: CompetencyViewModel
     private lateinit var projectSpinnerAdapter: ProjectSpinnerAdapter
     private lateinit var dialog: AlertDialog
     private var intentExtra: Int = 0
@@ -36,7 +42,6 @@ class AddTechmEmployeeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_employee)
         supportActionBar?.title = getString(R.string.add_employee)
-
         initView()
 
     }
@@ -44,9 +49,10 @@ class AddTechmEmployeeActivity : AppCompatActivity() {
     //initialize the params
     private fun initView() {
         techmEmployeeViewModel = ViewModelProvider(this).get(TechmEmployeeViewModel::class.java)
+        projectViewModel = ViewModelProvider(this).get(ProjectViewModel::class.java)
         intentExtra = intent.getIntExtra(AppConstant.readyToUpdate, 0)
-        etv_add_id.keyListener = null
-        etv_add_id.isEnabled = false
+        etv_add_emp_id.keyListener = null
+        etv_add_emp_id.isEnabled = false
         if (intentExtra == 0)
             btn_emp_edit.visibility = View.GONE
         else {
@@ -69,25 +75,49 @@ class AddTechmEmployeeActivity : AppCompatActivity() {
         }
         setupProgressDialog()
         loadProjectAdpater()
+        addCompetencies()
+        techmEmployeeViewModel.responseType.observe(this, Observer {
+            hideProgressDialog()
+            if (it.status.equals(TechmEmployeeApplication.context.resources.getString(R.string.success))) {
+                Toast.makeText(TechmEmployeeApplication.context, it.status, Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(TechmEmployeeApplication.context, it.error, Toast.LENGTH_SHORT)
+                    .show()
 
+            }
+        })
         techmEmployeeViewModel.addEmployeeInfoMutableLiveData.observe(this, Observer {
             displayEmployeeInfo(it)
         })
 
-        techmEmployeeViewModel.responseType.observe(this, Observer {
-            hideProgressDialog()
-            when (it.status) {
-
-            }
+        competencyViewModel.competencyInfoLiveData.observe(this, Observer {
+            loadCompetencyData(it as ArrayList<CompetencyInfo>)
         })
     }
+    private fun addCompetencies(){
+        val options = arrayOf("Android", "IOS", "ux", "Tester")
+        for(item in options) {
+            competencyViewModel.addCompetency(item)
+        }
 
-    // set adapter
+    }
+
+    private fun loadCompetencyData(competencyInfo: ArrayList<CompetencyInfo>) {
+        //These options will be the regular radio buttons
+        for (option in competencyInfo) {
+            val radioButton = RadioButton(this)
+            radioButton.text = option.competencyName
+            rg_emp_competency.addView(radioButton)
+        }
+    }
+
+    // set projectadapter
     private fun loadProjectAdpater() {
         projectSpinnerAdapter = ProjectSpinnerAdapter(this, ArrayList())
         spinner_emp_project.adapter = projectSpinnerAdapter
 
-        techmEmployeeViewModel.projectInfoLiveData.observe(this, Observer {
+        projectViewModel.projectInfoLiveData.observe(this, Observer {
             projectSpinnerAdapter.setLIst(it as ArrayList<ProjectInfo>)
             if (intentExtra != 0) {
                 var position = projectSpinnerAdapter.getPosition(editProjectName)
@@ -119,7 +149,6 @@ class AddTechmEmployeeActivity : AppCompatActivity() {
         etv_add_emp_band.setText("")
         etv_add_emp_designation.setText("")
         etv_add_emp_id.setText("")
-        etv_add_id.setText("")
         rg_emp_competency.clearCheck()
     }
 
@@ -128,8 +157,7 @@ class AddTechmEmployeeActivity : AppCompatActivity() {
         etv_add_emp_name.setText(employee.name)
         etv_add_emp_band.setText(employee.band)
         etv_add_emp_designation.setText(employee.designation)
-        etv_add_emp_id.setText(employee.employeeId)
-        etv_add_id.setText("" + employee.id)
+        etv_add_emp_id.setText("" + employee.employeeId)
         when (employee.competency) {
             getString(R.string.android) ->
                 radio_android.isSelected = true
@@ -150,7 +178,6 @@ class AddTechmEmployeeActivity : AppCompatActivity() {
         val employeeName = etv_add_emp_name.text.toString()
         val employeeBand = etv_add_emp_band.text.toString()
         val employeeDesignation = etv_add_emp_designation.text.toString()
-        val textFieldEmployeeID = etv_add_emp_id.text.toString()
 
         var employeeCompetency: String =
             findViewById<RadioButton>(rg_emp_competency.checkedRadioButtonId).text.toString()
@@ -168,10 +195,6 @@ class AddTechmEmployeeActivity : AppCompatActivity() {
                 tv_add_emp_error.error = getString(R.string.input_required)
                 tv_add_emp_error.visibility = View.VISIBLE
             }
-            TextUtils.isEmpty(textFieldEmployeeID) -> {
-                tv_add_emp_error.error = getString(R.string.input_required)
-                tv_add_emp_error.visibility = View.VISIBLE
-            }
 
             (project == "" || project == getString(R.string.select_project)) -> {
                 Toast.makeText(
@@ -181,21 +204,20 @@ class AddTechmEmployeeActivity : AppCompatActivity() {
                 ).show()
             }
             else -> {
-                var mModelEmployeeRegistration =
+                var addEmployeeInfoObj =
                     AddEmployeeInfo(
                         0,
                         employeeName,
                         employeeBand,
                         employeeDesignation,
-                        textFieldEmployeeID,
                         employeeCompetency,
                         project
                     )
                 if (intentExtra == 0)
-                    techmEmployeeViewModel.addEmployeeInfo(mModelEmployeeRegistration)
+                    techmEmployeeViewModel.addEmployeeInfo(addEmployeeInfoObj)
                 else {
-                    mModelEmployeeRegistration.id = etv_add_id.text.toString().toInt()
-                    techmEmployeeViewModel.updateEmployeeInfo(mModelEmployeeRegistration)
+                    addEmployeeInfoObj.employeeId = etv_add_emp_id.text.toString().toInt()
+                    techmEmployeeViewModel.updateEmployeeInfo(addEmployeeInfoObj)
                 }
                 clearText()
                 project = ""
@@ -207,7 +229,6 @@ class AddTechmEmployeeActivity : AppCompatActivity() {
     private fun enableView() {
         etv_add_emp_name.isEnabled = true
         etv_add_emp_band.isEnabled = true
-        etv_add_emp_id.isEnabled = true
         etv_add_emp_designation.isEnabled = true
         rg_emp_competency.isEnabled = true
         spinner_emp_project.isEnabled = true
@@ -219,7 +240,6 @@ class AddTechmEmployeeActivity : AppCompatActivity() {
     private fun disableViews() {
         etv_add_emp_name.isEnabled = false
         etv_add_emp_band.isEnabled = false
-        etv_add_emp_id.isEnabled = false
         etv_add_emp_designation.isEnabled = false
         rg_emp_competency.isEnabled = false
         spinner_emp_project.isEnabled = false

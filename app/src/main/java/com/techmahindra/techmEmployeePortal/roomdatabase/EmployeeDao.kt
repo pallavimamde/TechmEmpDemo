@@ -6,7 +6,7 @@ import androidx.room.*
 import com.techmahindra.techmEmployeePortal.data.response.AddEmployeeInfo
 
 /**
- * EmployeeDao - handle roomdatabase
+ * EmployeeDao - handle operations on employee_information roomdatabase, like select, insert, delete
  */
 @Dao
 interface EmployeeDao {
@@ -19,7 +19,7 @@ interface EmployeeDao {
     @Insert
     suspend fun addTechmEmployeeList(employeeList: ArrayList<AddEmployeeInfo>?)
 
-    @Query("SELECT * FROM employee_information WHERE id = :id")
+    @Query("SELECT * FROM employee_information WHERE employeeId = :id")
     suspend fun findByEmployeeId(id: String?): AddEmployeeInfo
 
     @Update

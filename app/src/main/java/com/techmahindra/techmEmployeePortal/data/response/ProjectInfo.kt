@@ -1,4 +1,4 @@
-package com.techmahindra.techmEmployeePortal.roomdatabase
+package com.techmahindra.techmEmployeePortal.data.response
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
